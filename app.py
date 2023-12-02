@@ -2,7 +2,11 @@ from flask import Flask, request, render_template, redirect, url_for, session
 import pymysql
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import db
+from controller.blog import blog_app
+
 app = Flask(__name__)
+app.register_blueprint(blog_app)
+
 @app.route('/')
 def welcome():
     db_config = db.db_config
@@ -11,8 +15,10 @@ def welcome():
     cursor = db_conn.cursor()
 
     sql = db.sql
+    sql_blog = db.sql_blog
  
     cursor.execute(sql)
+    cursor.execute(sql_blog)
 
     return render_template("index.html")
 
@@ -85,6 +91,7 @@ def login_post():
         return redirect(url_for('welcome'))
 
     return redirect(url_for('welcome'))
+
 
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'

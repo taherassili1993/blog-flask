@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style type="text/css">
+    input, textarea
+    {
+        border: 1px solid #ccc !important;
+    }
+
+    textarea
+    {
+        height: 500px !important;
+    }
+
+    input:focus, textarea:focus
+    {
+        box-shadow: none !important;
+        outline: none !important;
+    }
+
+    button
+    {
+        width: 150px !important;
+    }
+</style>
+<div class="column is-6 is-offset-3">
+    <h3 class="title">Ajouter article maintenant</h3>
+    <div class="box">
+        <form method="POST" action="/ajouter-article">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="titre" placeholder="Le titre" autofocus="" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <textarea class="textarea is-large" type="text" name="content" placeholder="Le contenu de votre blog" autofocus="" required></textarea>
+                </div>
+            </div>
+
+            <button class="button is-block is-info">Ajouter article</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
