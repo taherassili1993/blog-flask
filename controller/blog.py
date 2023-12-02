@@ -33,4 +33,17 @@ def article_post():
 
 @blog_app.route('/article/<id>')
 def article(id):
-    return render_template("article.html")
+    db_config = db.db_config
+
+    db_conn = pymysql.connect(**db_config)
+    cursor = db_conn.cursor()
+
+    cursor.execute('select id, titre, content, user_id, created_at from articles where id = %s', (id))
+    findArticle = cursor.fetchone()
+    if not findArticle:
+        return redirect(url_for('welcome'))
+
+    cursor.execute('select id, name, email from users where id = %s', (findArticle[3]))
+    findUser = cursor.fetchone()
+
+    return render_template("article.html", article = findArticle, user = findUser)
