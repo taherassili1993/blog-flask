@@ -47,3 +47,15 @@ def article(id):
     findUser = cursor.fetchone()
 
     return render_template("article.html", article = findArticle, user = findUser)
+
+
+@blog_app.route('/articles')
+def articles():
+    db_config = db.db_config
+
+    db_conn = pymysql.connect(**db_config)
+    cursor = db_conn.cursor()
+
+    cursor.execute('select id, titre, content, created_at from articles')
+    articles = cursor.fetchall()
+    return render_template("articles.html", articles = articles)
