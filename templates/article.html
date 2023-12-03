@@ -19,8 +19,9 @@
 
         <div class="col-md-1"></div>
 
-        <div class="col-md-5">
-            <h1 style="text-align: center;">{{ article[1] }}</h1>
+        <div class="col-md-7">
+            <img src="{{ url_for('static', filename='img/article.jpg') }}" alt="" width="90%" height="600" style="margin-left: 5%;">
+            <h1 style="text-align: center; margin-top: 30px; margin-bottom: 20px;">{{ article[1] }}</h1>
             <p> {{ article[2]}}</p>
         </div>
     </div>
