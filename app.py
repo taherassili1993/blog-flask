@@ -21,7 +21,10 @@ def welcome():
     cursor.execute(sql)
     cursor.execute(sql_blog)
 
-    return render_template("index.html")
+    cursor.execute('select id, titre, content, created_at from articles limit 2')
+    articles = cursor.fetchall()
+
+    return render_template("index.html", articles = articles)
 
 
 app.secret_key = 'super secret key'
